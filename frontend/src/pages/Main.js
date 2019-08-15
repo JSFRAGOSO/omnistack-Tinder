@@ -8,16 +8,17 @@ import './Main.css';
 
 export default function Main({match}){
     const [users,setUsers] = useState([]); 
+
     useEffect(() => {
-       async function loadUsers(){
+        async function loadUsers(){
             const response = await Api.get('/devs', {
                 headers:{
                     user:match.params.id
                 }
             });
             setUsers(response.data)            
-       } 
-       loadUsers();
+        }
+        loadUsers();
     },
      [match.params.id]);
 
@@ -38,11 +39,32 @@ export default function Main({match}){
         setUsers(users.filter(user => user._id !== id));
     }
 
+    async function handleLikes(){
+        const response = await Api.get('/like', {
+            headers:{
+                user:match.params.id
+            }
+        });
+            setUsers(response.data)           
+        }
+    async function handleDevs(){
+        const response = await Api.get('/devs', {
+            headers:{
+                user:match.params.id
+            }
+        });
+            setUsers(response.data)           
+        }
+
     return(
         <div className="main-container">
             <Link to="/" >
                 <img src ={logo} alt="Tindev"/>
             </Link>
+            <div class="tab">
+                <button class="buttons"onClick={() => {handleDevs()}}>Procurar Devs</button>
+                <button class="buttons" onClick={() => {handleLikes()}}>Curtidas</button>
+            </div>
             {users.length > 0 ? 
                 <ul>
                     {
@@ -65,7 +87,7 @@ export default function Main({match}){
                         ))
                     } 
                 </ul>
-                :<div className= "empty"> Não há mais Devs </div>
+                :<div className= "empty"> Ops... Não há Devs </div>
                 }
         </div>    
     );

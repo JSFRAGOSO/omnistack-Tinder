@@ -5,6 +5,32 @@
     text-align: center;
 }
 
+.main-container .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f10000;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+.main-container .tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    color: #eee;
+  }
+
+.main-container .tab button:hover {
+    background-color: #000;
+  }
+  
+  /* Create an active/current tablink class */
+.main-container .tab button.active {
+    background-color: #ccc;
+  }  
+
 .main-container ul{
     list-style: none;
     display: grid;

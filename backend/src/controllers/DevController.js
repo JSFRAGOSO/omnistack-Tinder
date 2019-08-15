@@ -20,7 +20,7 @@ module.exports = {
     async store(req,res){
         const {username} = req.body;
         
-        const devExists = await Dev.findOne({user:username});
+        const devExists = await Dev.findOne({user:username.toUpperCase()});
 
         if(devExists){
             return res.json(devExists);
